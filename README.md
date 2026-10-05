@@ -1,4 +1,4 @@
-# sdmx3checker-nopysdmx
+# sdmx3checker
 
 Checks an SDMX registry for one SDMX 3.0 requirement: **a final structure must not depend on a structure that is not final.**
 
@@ -34,13 +34,13 @@ If a request returns 404, for example because the registry doesn't support that 
 uv run python main.py --base-url <URL> --output <FILE.xlsx> [--user <USER> --password <PASSWORD> --openid-url <URL>] [-d]
 ```
 
-| Option | Required | Description |
-|---|---|---|
-| `--base-url` | yes | REST endpoint of the registry. A trailing `/` is added if missing. |
-| `--output` | yes | Excel file to write. It is overwritten if it exists. |
-| `--user`, `--password` | no | Keycloak credentials. Give both or neither. Without them, requests are anonymous. |
-| `--openid-url` | with `--user` | Keycloak OpenID configuration URL, usually `https://<keycloak-host>/realms/<realm>/.well-known/openid-configuration`. |
-| `-d`, `--debug` | no | Show debug logging, including every request and response. |
+| Option                 | Required      | Description                                                                                                           |
+| ---------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `--base-url`           | yes           | REST endpoint of the registry. A trailing `/` is added if missing.                                                    |
+| `--output`             | yes           | Excel file to write. It is overwritten if it exists.                                                                  |
+| `--user`, `--password` | no            | Keycloak credentials. Give both or neither. Without them, requests are anonymous.                                     |
+| `--openid-url`         | with `--user` | Keycloak OpenID configuration URL, usually `https://<keycloak-host>/realms/<realm>/.well-known/openid-configuration`. |
+| `-d`, `--debug`        | no            | Show debug logging, including every request and response.                                                             |
 
 ### Fusion Metadata Registry (anonymous)
 
@@ -75,14 +75,14 @@ A password passed on the command line is saved in your shell history and is visi
 
 The Excel file has one sheet, `Violations`, with one row for each final structure and non-final related structure:
 
-| Column | Description |
-|---|---|
-| `StructureType` | Type of the final structure, as named in the SDMX-JSON response (e.g. `codelists`) |
-| `AgencyID`, `StructureID`, `Version` | Identifies the final structure |
-| `IsFinal` | The structure's `isFinal` value |
-| `IsSemverFinal` | Whether the version is a semantic version with no pre-release suffix |
-| `RefStructureType`, `RefAgencyID`, `RefStructureID`, `RefVersion` | Identifies the related structure that is not final |
-| `RefIsFinal`, `RefIsSemverFinal` | Same as above, for the related structure (both are false) |
+| Column                                                            | Description                                                                        |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `StructureType`                                                   | Type of the final structure, as named in the SDMX-JSON response (e.g. `codelists`) |
+| `AgencyID`, `StructureID`, `Version`                              | Identifies the final structure                                                     |
+| `IsFinal`                                                         | The structure's `isFinal` value                                                    |
+| `IsSemverFinal`                                                   | Whether the version is a semantic version with no pre-release suffix               |
+| `RefStructureType`, `RefAgencyID`, `RefStructureID`, `RefVersion` | Identifies the related structure that is not final                                 |
+| `RefIsFinal`, `RefIsSemverFinal`                                  | Same as above, for the related structure (both are false)                          |
 
 The header row is bold and stays visible when you scroll, and filters are on.
 
