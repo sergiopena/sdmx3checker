@@ -1,0 +1,14 @@
+[project]
+name = "sdmx3checker"
+version = "0.1.0"
+description = "Check that final SDMX structures only reference final structures"
+authors = [{ name = "Sergio Pena", email = "isergiopena@gmail.com" }]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "msgspec>=0.22.0",
+    "openpyxl>=3.1.5",
+    "statsuite-lib>=0.2.10",
+]
